@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/Tools/MySQL/Connector.J 5.1/mysql-connector-java-5.1.36-bin.jar"/>
+	<classpathentry kind="lib" path="D:/android-x86/LIB/nekohtml-1.9.20/nekohtml.jar"/>
+	<classpathentry kind="lib" path="D:/android-x86/LIB/xalan-j_2_7_1/serializer.jar"/>
+	<classpathentry kind="lib" path="D:/android-x86/LIB/xalan-j_2_7_1/xalan.jar"/>
+	<classpathentry kind="lib" path="D:/android-x86/LIB/xalan-j_2_7_1/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="D:/android-x86/LIB/xalan-j_2_7_1/xml-apis.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
