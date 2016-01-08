@@ -8,7 +8,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 
 public class UploadData {
 	List<NameValuePair> params = null;
@@ -36,8 +35,7 @@ public class UploadData {
 			// 若状态码为200
 			if (httpResponse.getStatusLine().getStatusCode() == 200) {
 				// 获得返回的数据
-				String strResult = EntityUtils.toString(httpResponse
-						.getEntity());
+				//String strResult = EntityUtils.toString(httpResponse.getEntity());
 				RS= "信息发送成功";
 
 			} else {

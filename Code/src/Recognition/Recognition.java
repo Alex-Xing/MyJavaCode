@@ -45,7 +45,7 @@ public class Recognition {
 		}
         
         String line;
-        int i = 0;  
+        //int i = 0;  
         String CodeNum="";
         //注意这里生成txt是需要时间的，所有进程需要等待直到返回再继续执行，否则就会找不到文件  
         try {

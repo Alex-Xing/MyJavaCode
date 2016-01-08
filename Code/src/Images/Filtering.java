@@ -252,7 +252,7 @@ public class Filtering {
 		double m1, m2, sum, csum, fmax, sb; // sb为类间方差，fmax存储最大方差值
 		int k, t, q;
 		int threshValue = 1; // 阈值
-		int step = 1;
+		//int step = 1;
 		// 生成直方图
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {

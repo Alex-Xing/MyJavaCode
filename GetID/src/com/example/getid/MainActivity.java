@@ -19,7 +19,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -287,8 +286,7 @@ public class MainActivity extends Activity {
 			// 若状态码为200
 			if (httpResponse.getStatusLine().getStatusCode() == 200) {
 				// 获得返回的数据
-				String strResult = EntityUtils.toString(httpResponse
-						.getEntity());
+				//String strResult = EntityUtils.toString(httpResponse.getEntity());
 
 			} else {
 				// openDialog("Error!");
