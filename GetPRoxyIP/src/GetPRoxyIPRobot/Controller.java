@@ -48,13 +48,13 @@ public class Controller implements Runnable {
 		 * You can set the maximum crawl depth here. The default value is -1 for
 		 * unlimited depth
 		 */
-		config.setMaxDepthOfCrawling(2);
+		config.setMaxDepthOfCrawling(4);
 
 		/*
 		 * You can set the maximum number of pages to crawl. The default value
 		 * is -1 for unlimited number of pages
 		 */
-		config.setMaxPagesToFetch(1000);
+		config.setMaxPagesToFetch(100000);
 
 		/*
 		 * Do you need to set a proxy? If so, you can use:
@@ -97,7 +97,7 @@ public class Controller implements Runnable {
 		 * which are found in these pages
 		 */
 		// 设置要爬的网址，可以多个；
-		String[] crawlerDomains = new String[] { "http://www.proxy360.cn/", "http://www.xicidaili.com/" };
+		String[] crawlerDomains = new String[] { "http://www.kuaidaili.com/"};//,"http://www.proxy360.cn/", "http://www.xicidaili.com/" };
 		controller.setCustomData(crawlerDomains);
 		for (String MycrawlDomain : crawlerDomains) {
 			controller.addSeed(MycrawlDomain);// 把全部要爬的网址，设置为种子地址
@@ -113,7 +113,7 @@ public class Controller implements Runnable {
 	public static void main(String[] args) {
 		ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(1);
 		Controller test = new Controller();
-		// test.run();//system.out.println("test");
+		//test.run();//system.out.println("test");
 		scheduledThreadPool.scheduleAtFixedRate(test, 0, 1, TimeUnit.DAYS);
 
 	}

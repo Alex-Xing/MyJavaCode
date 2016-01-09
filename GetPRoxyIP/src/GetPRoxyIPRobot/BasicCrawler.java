@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.regex.Pattern;
 
+import AnalyseWebPage.AnalyseKuaidaili;
 import AnalyseWebPage.AnalyseProxy360;
 import AnalyseWebPage.AnalyseXICI;
 import edu.uci.ics.crawler4j.crawler.Page;
@@ -17,13 +18,13 @@ import edu.uci.ics.crawler4j.url.WebURL;
 
 public class BasicCrawler extends WebCrawler {
 
-	private final static Pattern FILTERS = Pattern
-			.compile(".*(\\.(css|js|bmp|gif|jpe?g"
-					+ "|png|tiff?|mid|mp2|mp3|mp4"
-					+ "|wav|avi|mov|mpeg|ram|m4v|pdf"
-					+ "|rm|smil|wmv|swf|wma|zip|rar|gz))$");
+	private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|bmp|gif|jpe?g" + "|png|tiff?|mid|mp2|mp3|mp4"
+			+ "|wav|avi|mov|mpeg|ram|m4v|pdf" + "|rm|smil|wmv|swf|wma|zip|rar|gz))$");
 
 	private String[] myCrawlDomains;
+
+	private final static boolean CaptionWebHtml = false;// 测试所用的变量，用来输出Domain和SaveWebHtml
+	private final static String SaveWebHtml="d:/test.html";//保存CaptionWebHtml输出HTML页面的路径
 
 	@Override
 	public void onStart() {
@@ -33,7 +34,7 @@ public class BasicCrawler extends WebCrawler {
 	@Override
 	public boolean shouldVisit(WebURL url) {
 		String href = url.getURL().toLowerCase();
-		//System.out.println("Test URL: " + url);
+		// System.out.println("Test URL: " + url);
 		if (FILTERS.matcher(href).matches()) {
 			return false;
 		}
@@ -55,21 +56,25 @@ public class BasicCrawler extends WebCrawler {
 		 * System.out.println("Docid: " + docid); System.out.println("URL: " +
 		 * url); System.out.println("Docid of parent page: " + parentDocid);
 		 */
-		//System.out.println(page.toString());
+		// System.out.println(page.toString());
 		if (page.getParseData() instanceof HtmlParseData) {
 			String url = page.getWebURL().getURL();
 			String Domain = page.getWebURL().getDomain();
-			//String[] str =(String[]) myController.getCustomData();
-			//URL TestURL = new URL(str[0]);
+			// String[] str =(String[]) myController.getCustomData();
+			// URL TestURL = new URL(str[0]);
 
 			System.out.println("URL: " + url);
-			//System.out.println("Domain: " + Domain);
-			//System.out.println("=============");
+
+			// System.out.println("=============");
 			HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
 			String html = htmlParseData.getHtml();
-			//System.out.println(html);
-			//生成最终获取的网页分析真实的XPath，网页展示与最终获取的网页可能会有很大差别
-			//CreatHtmlFile("d:/test.html",html);
+			if (CaptionWebHtml) {
+				// System.out.println(html);
+				// 生成最终获取的网页分析真实的XPath，网页展示与最终获取的网页可能会有很大差别
+				System.out.println("Domain: " + Domain);
+				CreatHtmlFile(SaveWebHtml, html);
+				return;
+			}
 			switch (Domain) {
 			case "xicidaili.com":
 				AnalyseXICI XICI = new AnalyseXICI();
@@ -78,6 +83,10 @@ public class BasicCrawler extends WebCrawler {
 			case "proxy360.cn":
 				AnalyseProxy360 Proxy360 = new AnalyseProxy360();
 				Proxy360.AnalyseHTML(html);
+				break;
+			case "kuaidaili.com":
+				AnalyseKuaidaili Kuaidaili = new AnalyseKuaidaili();
+				Kuaidaili.AnalyseHTML(html);
 				break;
 			}
 
@@ -123,7 +132,7 @@ public class BasicCrawler extends WebCrawler {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}// 将字节一个个写入文件
+		} // 将字节一个个写入文件
 	}
 
 	public void CreatPath(String Path) {

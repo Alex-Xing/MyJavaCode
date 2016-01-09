@@ -39,6 +39,6 @@ public class AnalyseProxy360 extends BaseAnalyse {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		AnalyseProxy360 test = new AnalyseProxy360();
-		test.Analyse("d:/test.htm");
+		test.Analyse("d:/test.html");
 	}
 }

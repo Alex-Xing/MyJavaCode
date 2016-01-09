@@ -160,7 +160,7 @@ public class TestControlle {
 			// @Override
 			public void run() {
 				TestControlle test = new TestControlle();
-				test.Run(10);
+				test.Run(20);
 			}
 		}, 0, 1, TimeUnit.DAYS);
 	}
