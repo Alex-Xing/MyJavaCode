@@ -4,34 +4,9 @@ import org.cyberneko.html.parsers.DOMParser;
 import org.w3c.dom.Document;
 
 public class AnalyseXICI extends BaseAnalyse {
-	/*
-	private String SaveToFileOrDatabaseMark="File";//可以有File和DB两各种选择
-	private DataConnect MyConn = new DataConnect();
-	//private SystemParams MyParams = new SystemParams();
-
-	public AnalyseXICI() {
-		switch(SaveToFileOrDatabaseMark)
-		{
-		case "File":
-			;
-			break;
-		case "DB":
-			MyConn.GetConn(SystemParams.DatabaseHose, SystemParams.DatabasePort,
-					SystemParams.DatabaseName, SystemParams.DatabaseUser,
-					SystemParams.DatabasePassword);
-			break;
-		default:
-			;
-		}
-		
-	}
-	*/
+	
 	public void LoadPage(DOMParser parser) {
 		Document doc = parser.getDocument();
-
-		// Node body = doc.getElementsByTagName("BODY").item(0);
-		// System.out.println(TextExtractor(body));
-
 		String xpath = "/html/body/div/div[2]/div/div/table/tbody/tr[3]/td[2]";
 		String TmpString = queryByXpath(doc, xpath);
 		if (TmpString != null) {

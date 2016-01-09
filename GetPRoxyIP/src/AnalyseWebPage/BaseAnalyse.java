@@ -48,6 +48,7 @@ public class BaseAnalyse {
 		}
 		
 	}
+	
 	public void Analyse(String FilePath) {
 		BufferedReader in = null;
 		try {
@@ -66,6 +67,7 @@ public class BaseAnalyse {
 		// 解析HTML内容
 		DOMParser parser = new DOMParser();
 		try {
+			parser.setFeature("http://xml.org/sax/features/namespaces", false);//解決有命名空间的页面会报错的设置
 			parser.parse(new InputSource(new ByteArrayInputStream(HTML
 					.getBytes())));
 		} catch (SAXException e) {
@@ -82,6 +84,8 @@ public class BaseAnalyse {
 	public void Analyse(BufferedReader in) {
 		DOMParser parser = new DOMParser();
 		try {
+			parser.setFeature("http://xml.org/sax/features/namespaces", false);//解決有命名空间的页面会报错的设置
+			//初始化页面（格式检查与补充）
 			parser.parse(new InputSource(in));
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
@@ -90,6 +94,7 @@ public class BaseAnalyse {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		 
 		LoadPage(parser);
 
 	}

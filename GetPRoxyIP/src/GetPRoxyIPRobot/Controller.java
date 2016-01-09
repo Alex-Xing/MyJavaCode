@@ -14,11 +14,10 @@ public class Controller implements Runnable {
 	public void run() {
 		/*
 		 * if (args.length != 2) { System.out.println("Needed parameters: ");
-		 * System.out
-		 * .println("\t rootFolder (it will contain intermediate crawl data)");
-		 * System.out
-		 * .println("\t numberOfCralwers (number of concurrent threads)");
-		 * return; }
+		 * System.out .println(
+		 * "\t rootFolder (it will contain intermediate crawl data)");
+		 * System.out .println(
+		 * "\t numberOfCralwers (number of concurrent threads)"); return; }
 		 */
 
 		/*
@@ -83,12 +82,10 @@ public class Controller implements Runnable {
 		 */
 		PageFetcher pageFetcher = new PageFetcher(config);
 		RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
-		RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig,
-				pageFetcher);
-		CrawlController controller=null;
+		RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
+		CrawlController controller = null;
 		try {
-			controller = new CrawlController(config, pageFetcher,
-					robotstxtServer);
+			controller = new CrawlController(config, pageFetcher, robotstxtServer);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,11 +96,11 @@ public class Controller implements Runnable {
 		 * URLs that are fetched and then the crawler starts following links
 		 * which are found in these pages
 		 */
-		//设置要爬的网址，可以多个；
-		String[] crawlerDomains = new String[] { "http://www.xicidaili.com/" };
+		// 设置要爬的网址，可以多个；
+		String[] crawlerDomains = new String[] { "http://www.proxy360.cn/", "http://www.xicidaili.com/" };
 		controller.setCustomData(crawlerDomains);
 		for (String MycrawlDomain : crawlerDomains) {
-			controller.addSeed(MycrawlDomain);//把全部要爬的网址，设置为种子地址
+			controller.addSeed(MycrawlDomain);// 把全部要爬的网址，设置为种子地址
 		}
 
 		/*
@@ -112,12 +109,13 @@ public class Controller implements Runnable {
 		 */
 		controller.start(BasicCrawler.class, numberOfCrawlers);
 	}
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(1);
 		Controller test = new Controller();
-		//test.run();//system.out.println("test");
-		scheduledThreadPool.scheduleAtFixedRate(test,0, 1, TimeUnit.DAYS);
-		
+		// test.run();//system.out.println("test");
+		scheduledThreadPool.scheduleAtFixedRate(test, 0, 1, TimeUnit.DAYS);
+
 	}
 
 }

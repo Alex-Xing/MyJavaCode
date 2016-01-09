@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import DataOperation.DataConnect;
 
@@ -17,9 +19,8 @@ public class TestControlle {
 	private ExecutorService fixedThreadPool = null;// Executors.newFixedThreadPool(10);
 
 	public TestControlle() {
-		MyConn.GetConn(SystemParams.DatabaseHose, SystemParams.DatabasePort,
-				SystemParams.DatabaseName, SystemParams.DatabaseUser,
-				SystemParams.DatabasePassword);
+		MyConn.GetConn(SystemParams.DatabaseHose, SystemParams.DatabasePort, SystemParams.DatabaseName,
+				SystemParams.DatabaseUser, SystemParams.DatabasePassword);
 	}
 
 	public void Run(int Tcount) {
@@ -28,8 +29,7 @@ public class TestControlle {
 		// Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 		fixedThreadPool = Executors.newFixedThreadPool(Tcount);
 		try {
-			Statement statement = (Statement) MyConn.GetConn()
-					.createStatement();
+			Statement statement = (Statement) MyConn.GetConn().createStatement();
 			String sql = "SELECT IPAddress FROM `proxy_list`";
 			ResultSet rs = statement.executeQuery(sql);
 			String[] ProxyInfo = new String[Tcount];
@@ -87,8 +87,7 @@ public class TestControlle {
 			String[] IPInfo = new String[2];
 			IPInfo = TmpIPStr[I].split(":");
 			Tester[I] = new ProxyTestRobot();
-			Tester[I].Init(TargetURL, IPInfo[0], Integer.parseInt(IPInfo[1]),
-					10);
+			Tester[I].Init(TargetURL, IPInfo[0], Integer.parseInt(IPInfo[1]), 10);
 			fixedThreadPool.execute(Tester[I]);
 		}
 
@@ -114,21 +113,17 @@ public class TestControlle {
 		}
 	}
 
-	//更新数据库中的测试结果
+	// 更新数据库中的测试结果
 	public void UpdateTestResult(String[] Result) {
 		String IPStr = Result[0] + ":" + Result[1];
 		String Speed = Result[2];
 		String Work = Result[3];
 		String Type = Result[4];
 		try {
-			Statement statement = (Statement) MyConn.GetConn()
-					.createStatement();
-			String sql = "UPDATE `proxy_list` SET " + "`Speed` = '"
-					+ Speed.trim() + "', "
-					+
+			Statement statement = (Statement) MyConn.GetConn().createStatement();
+			String sql = "UPDATE `proxy_list` SET " + "`Speed` = '" + Speed.trim() + "', " +
 					// "`Location` = '"+Location.trim()+"', " +
-					"`CheckTime` = now(), " + "`Work` = '" + Work.trim()
-					+ "', ";
+					"`CheckTime` = now(), " + "`Work` = '" + Work.trim() + "', ";
 			if (Type == null || Type.equals("NULL")) {
 				sql = sql + "`Type` = NULL ";
 			} else {
@@ -136,7 +131,7 @@ public class TestControlle {
 			}
 
 			sql = sql + "WHERE `IPAddress` = '" + IPStr.trim() + "'; ";
-			//System.out.println(sql);
+			// System.out.println(sql);
 			statement.executeUpdate(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -157,18 +152,16 @@ public class TestControlle {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TestControlle test = new TestControlle();
-		test.Run(5);
-
-		// ScheduledExecutorService scheduledThreadPool =
-		// Executors.newScheduledThreadPool(1);
-		// scheduledThreadPool.scheduleAtFixedRate(new Runnable() {
-		//
-		// @Override
-		// public void run() {
 		// TestControlle test = new TestControlle();
-		// test.Run(10);
-		// }
-		// },0, 1, TimeUnit.DAYS);
+		// test.Run(5);
+
+		ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(1);
+		scheduledThreadPool.scheduleAtFixedRate(new Runnable() {
+			// @Override
+			public void run() {
+				TestControlle test = new TestControlle();
+				test.Run(10);
+			}
+		}, 0, 1, TimeUnit.DAYS);
 	}
 }

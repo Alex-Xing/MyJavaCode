@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.regex.Pattern;
 
+import AnalyseWebPage.AnalyseProxy360;
 import AnalyseWebPage.AnalyseXICI;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
@@ -66,11 +67,17 @@ public class BasicCrawler extends WebCrawler {
 			//System.out.println("=============");
 			HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
 			String html = htmlParseData.getHtml();
-			
+			//System.out.println(html);
+			//生成最终获取的网页分析真实的XPath，网页展示与最终获取的网页可能会有很大差别
+			//CreatHtmlFile("d:/test.html",html);
 			switch (Domain) {
 			case "xicidaili.com":
 				AnalyseXICI XICI = new AnalyseXICI();
 				XICI.AnalyseHTML(html);
+				break;
+			case "proxy360.cn":
+				AnalyseProxy360 Proxy360 = new AnalyseProxy360();
+				Proxy360.AnalyseHTML(html);
 				break;
 			}
 
@@ -90,7 +97,7 @@ public class BasicCrawler extends WebCrawler {
 		// System.out.println("=============");
 	}
 
-	public void CreatConfigFile(String Path, String Text) {
+	public void CreatHtmlFile(String Path, String Text) {
 		File f = new File(Path);
 		if (!f.exists()) {
 			try {
