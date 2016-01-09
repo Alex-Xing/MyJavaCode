@@ -75,7 +75,7 @@ public class Controller implements Runnable {
 		 * want to start a fresh crawl, you need to delete the contents of
 		 * rootFolder manually.
 		 */
-		config.setResumableCrawling(false);
+		config.setResumableCrawling(true);
 
 		/*
 		 * Instantiate the controller for this crawl.

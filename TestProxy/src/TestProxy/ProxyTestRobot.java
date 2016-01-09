@@ -110,6 +110,7 @@ public class ProxyTestRobot implements Runnable {
 		// 解析HTML内容
 		DOMParser parser = new DOMParser();
 		try {
+			parser.setFeature("http://xml.org/sax/features/namespaces", false);//解決有命名空间的页面会报错的设置
 			parser.parse(new InputSource(new ByteArrayInputStream(HTML.getBytes())));
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
@@ -246,7 +247,8 @@ public class ProxyTestRobot implements Runnable {
 
 		// TODO Auto-generated method stub
 		ProxyTestRobot test = new ProxyTestRobot();
-		test.Init("http://www.ip.cn/", "47.88.28.12", 3128, "alex", "951753", 10);
+		//test.Init("http://www.ip.cn/", "47.88.28.12", 3128, "alex", "951753", 10);
+		test.Init("http://www.ip.cn/", "120.52.73.22", 8080,  10);
 		Thread T1 = new Thread(test);
 		T1.start();
 		System.out.println("Start:");
