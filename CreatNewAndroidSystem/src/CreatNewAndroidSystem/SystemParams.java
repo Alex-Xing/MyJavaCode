@@ -7,6 +7,7 @@ public class SystemParams {
 	public static final String DatabaseName = "android";
 	public static final String DatabaseUser = "android";
 	public static final String DatabasePassword = "951753";
+	public static final String Request_App = "Request";
 	public static final String M_App = "M";
 	public static final String Other_App = "Other";
 	public static final String ExampleConfigPath = "D:/android-x86/config/";

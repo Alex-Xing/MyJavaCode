@@ -149,9 +149,10 @@ public class CreatNewSystemInfo {
 
 	// 产生必需要安装的APP列表
 	public String GetRequest_App_List() {
+
 		try {
 			Statement statement = (Statement) conn.GetConn().createStatement();
-			String sql = "SELECT * FROM `app_info` where type=\"Request\"";
+			String sql = "SELECT * FROM `app_info` where type=\""+SystemParams.Request_App+"\"";
 			ResultSet rs = statement.executeQuery(sql);
 			String List = "";
 			while (rs.next()) {

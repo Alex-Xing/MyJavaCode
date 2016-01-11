@@ -11,7 +11,7 @@ import org.apache.http.protocol.HTTP;
 
 public class UploadData {
 	List<NameValuePair> params = null;
-	String url = "http://199.193.248.141/ReceiveParam/Receive.php";
+	String url = "http://192.168.1.100/Receive.php";
 	String RS="";
 	public UploadData(List<NameValuePair> pa, String URL) {
 		params = pa;

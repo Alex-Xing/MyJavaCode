@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
 		ShowText.setText(GetAllInfo() + "\r\n" + GetInfoSignature());
 		List<NameValuePair> params = CreatSendMsg();
 		myupload = new UploadData(params,
-				"http://199.193.248.141/ReceiveParam/Receive.php");
+				"http://192.168.1.100/Receive.php");
 		
 		Thread thread = new Thread(new Runnable() {
 			@Override
@@ -250,9 +250,10 @@ public class MainActivity extends Activity {
 		params.add(new BasicNameValuePair("SDTotalSize", getSDTotalSize()));
 		return params;
 	}
-
+	/*
 	public void upload() {
-		String url = "http://199.193.248.141/ReceiveParam/Receive.php";
+		//String url = "http://199.193.248.141/ReceiveParam/Receive.php";
+		String url = "http://192.168.1.100/Receive.php";
 		HttpPost httpRequest = null;
 		List<NameValuePair> params = null;
 		HttpResponse httpResponse = null;
@@ -296,7 +297,7 @@ public class MainActivity extends Activity {
 		}
 
 	}
-
+	*/
 	public boolean fileIsExists(String FileName) {
 		File f = new File(FileName);
 		if (!f.exists()) {
